@@ -1,0 +1,361 @@
+:root{
+    --principal-color: #5da8a0;
+    --blue-color: #3e5586;
+    --green-color: #607123;
+    --mapa-color: #4ec27c;
+    --siembra-color: #95b54c;
+    --cosecha-color: #A18262;
+    --border-light-color: #d0d0d0;
+    --text-white-color: #fff;
+}
+
+html{
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.main{
+    width: 85%;
+    height: auto;
+    position: absolute;
+    right: 0;
+    padding-top: 1rem;
+}
+
+nav{
+    width: 50%;
+    margin: 0 auto;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-light-color);
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+}
+
+nav ul li p{
+    position: relative;
+    font-size: 1.1rem;
+    width: 7rem;
+    height: 60%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.selected{
+    color: var(--principal-color);
+    font-weight: bold;
+}
+
+.anim-bottom::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: .25rem;
+    border-bottom-left-radius: .2rem;
+    border-bottom-right-radius: .2rem;
+    background-color: var(--principal-color);
+    transition: width .5s ease, left .5s ease, right .5s ease;
+}
+
+.anim-bottom:hover::after{
+    width: 100%;
+}
+
+.to-center::after{
+    left: 50%;
+}
+
+.to-center:hover::after{
+    left: 0;
+}
+
+.anim-bottom-menu::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: .1rem;
+    border-bottom-left-radius: .2rem;
+    border-bottom-right-radius: .2rem;
+    background-color: var(--border-light-color);
+    transition: width .5s ease, left .5s ease, right .5s ease;
+}
+
+.anim-bottom-menu:hover::after{
+    width: 100%;
+}
+
+.title-calendar{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+}
+
+.title-calendar i{
+    font-size: 2rem;
+    margin: 0 5rem;
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.title-calendar i:hover{
+    transform: scale(1.3);
+}
+
+.disabled{
+    color: rgba(0, 0, 0, .4);
+}
+
+.calendar-box{
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.calendar{
+    width: 100%;
+    padding: .5rem 0;
+}
+
+.info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2em;
+    font-size: 1rem;
+    text-transform: uppercase;
+    height: 2.4rem;
+    background-color: var(--principal-color);
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    color: var(--text-white-color);
+}
+
+.month, 
+.year{
+    padding: .5rem;
+}
+
+.weaks{
+    background-color: var(--principal-color);
+    color: var(--text-white-color);
+}
+
+.days_calendar{
+    border-left: 1px solid var(--border-light-color);
+    border-bottom: 1px solid var(--border-light-color);
+    border-right: 1px solid var(--border-light-color);
+    min-height: 155px;
+}
+
+.weaks,
+.days_calendar{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0;
+}
+
+.item_calendar{
+    text-align: center;
+    line-height: 2;
+    font-size: .8rem;
+}
+
+.today{
+    background-color: var(--blue-color);
+    color: var(--text-white-color);
+    width: 80%;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.last_days{
+    opacity: .3;
+}
+
+aside{
+    position: fixed;
+    top: .6rem;
+    left: 10px;
+    width: 15%;
+    height: 97vh;
+    color: var(--text-white-color);
+    border-radius: 1rem;
+    background-color: var(--blue-color);
+    overflow-y: auto;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.3);
+}
+
+aside::-webkit-scrollbar {
+    width: 8px;
+}
+
+aside::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background-color: var(--border-light-color);
+    border-radius: 4px;
+}
+
+aside h3{
+    width: 100%;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+aside ul{
+    padding: 0 1rem;
+    list-style: none;
+}
+
+.list-menu{
+    cursor: pointer;
+}
+
+.align-li{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: .2rem;
+}
+
+.align-li::after{
+    color: var(--border-light-color);
+}
+
+.align-li i:last-child{
+    margin-left: auto;
+    margin-right: .4rem;
+    transition: transform .2s ease-in-out;
+}
+
+.arrow i:last-child{
+    transform: rotate(90deg);
+}
+
+.name-group{
+    margin: 0 .5rem;
+    font-size: 1.1rem;
+}
+
+.item-group{
+    margin-top: .1rem;
+    margin-left: .2rem;
+    font-size: .9rem;
+}
+
+.item-group i{
+    font-size: .7rem;
+}
+
+.item-group p{
+    margin: 0 .5rem;
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.item-group p:hover{
+    transform: scale(1.2);
+    font-weight: bold;
+}
+
+.list-container{
+    margin-bottom: .5rem;
+    overflow: hidden;
+}
+
+.list-dinamic{
+    transition: height .4s;
+    height: 0;
+}
+
+.siembra{
+    background-color: var(--siembra-color);
+    opacity: .8;
+    transition: background-color .2s ease-in-out;
+}
+
+.cosecha{
+    background-color: var(--cosecha-color);
+    transition: background-color .2 ease-in-out;
+}
+
+.mapa{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.h1-mapa{
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.mapa-mexico{
+    width: 80%;
+    margin: auto;
+}
+
+.mapa-mexico path{
+    fill: var(--mapa-color);
+    stroke: #000;
+    stroke-width: 1px;
+    transition: fill .2s ease-in-out;
+}
+
+.country-option{
+    cursor: pointer;
+    font-size: .8rem;
+    transition: transform .2s ease-in-out;
+    padding-left: .5rem;
+}
+
+.country-option p{
+    font-size: 1rem;
+}
+
+.country-option:hover{
+    transform: scale(1.1);
+    font-weight: bold;
+}
+
+@media (max-width: 1250px) {
+    .calendar-box{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

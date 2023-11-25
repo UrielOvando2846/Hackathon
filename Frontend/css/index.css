@@ -1,0 +1,92 @@
+:root{
+    --principal-color: #5da8a0;
+    --blue-color: #3e5586;
+    --green-color: #607123;
+    --mapa-color: #4ec27c;
+    --siembra-color: #95b54c;
+    --cosecha-color: #A18262;
+    --border-light-color: #d0d0d0;
+    --text-white-color: #fff;
+}
+
+html{
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn{
+    border-radius: .5rem;
+    padding: 1rem;
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-white-color);
+    background-color: var(--principal-color);
+}
+
+.hero-image{
+    background-image: url('../assets/img/cultivos.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image-opacity{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-image-title{
+    font-size: 3.5vw;
+    color: var(--text-white-color);
+}
+
+.hero-image-description{
+    font-size: 1.2vw;
+    color: var(--text-white-color);
+}
+
+#progress-bar {
+    opacity: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 80%;
+    background-color: var(--border-light-color);
+    z-index: 1;
+    transition: opacity .2s ease-in-out;
+  }
+
+  /* Estilo de la barra de progreso que se coloreará */
+  #progress-indicator {
+    width: 100%;
+    height: 10px;
+    background-color: var(--principal-color); /* Color inicial */
+  }
+
+  #progress-bar.show {
+    opacity: 1;
+  }

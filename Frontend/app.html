@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultivos</title>
+    <link rel="stylesheet" href="./css/app.css">
+    <link href="./assets/fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
+    <link href="./assets/fontawesome-free-6.4.2-web/css/brands.css" rel="stylesheet">
+    <link href="./assets/fontawesome-free-6.4.2-web/css/solid.css" rel="stylesheet">
+</head>
+<body>
+
+    <aside id="menu">
+        <h3>Selecciona un Cultivo</h3>
+        <ul>
+            <li class="list-container">
+                <div class="align-li list-menu anim-bottom-menu to-center">
+                    <i class="fa-solid fa-plant-wilt"></i>
+                    <p class="name-group" id="cereales">Cereales</p>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <ul class="list-dinamic">
+                    <li class="align-li item-group">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p class="item">Maíz</p>
+                    </li>
+                    <li class="align-li item-group">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p class="item">Trigo</p>
+                    </li>
+                    <li class="align-li item-group">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p class="item">Lenteja</p>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="list-container">
+                <div class="align-li list-menu anim-bottom-menu to-center">
+                    <i class="fa-solid fa-plant-wilt"></i>
+                    <p class="name-group" id="cereales">Frutas</p>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <ul class="list-dinamic">
+                    <li class="align-li item-group">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p class="item">Mango</p>
+                    </li>
+                    <li class="align-li item-group">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p class="item">Fresa</p>
+                    </li>
+                    <li class="align-li item-group">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p class="item">Plátano</p>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+    </aside>
+
+    
+    <div class="main">
+        <nav>
+            <ul>
+                <li><p class="anim-bottom to-center" id="calendario-menu">Calendario</p</li>
+                <li><p class="anim-bottom to-center" id="mapa-menu">Mapa</p></li>
+            </ul>
+        </nav>
+        <div id="app"></div>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
