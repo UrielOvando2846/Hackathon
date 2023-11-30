@@ -92,7 +92,7 @@ const drawMap = async () => {
     $mapaContainer.id = 'mapa';
     $mapaContainer.classList.add('mapa');
 
-    const svgUrl = './assets/img/mx.svg';
+    const svgUrl = '../assets/img/mx.svg';
     try {
         const svgCode = await fetchSVG(svgUrl);
 

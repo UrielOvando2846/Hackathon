@@ -1,0 +1,267 @@
+:root{
+    --principal-color: #5da8a0;
+    --blue-color: #3e5586;
+    --green-color: #607123;
+    --mapa-color: #4ec27c;
+    --siembra-color: #95b54c;
+    --cosecha-color: #A18262;
+    --border-light-color: #d0d0d0;
+    --text-white-color: #fff;
+    --error-color: rgba(243, 83, 83, 0.5);
+    --border-error: rgb(255, 75, 75);
+    --succes-color: rgba(78, 255, 55, 0.5);
+    --border-succes: rgb(87, 255, 75);
+}
+
+html{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    background-color: #000;
+    border-radius: .2rem;
+    width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.menu-options{
+    height: 100%;
+    transition: transform .2s ease-in-out;
+    display: flex;
+}
+
+.menu-item{
+    list-style: none;
+    position: relative;
+    height: 100%;
+    width: 150px;
+    --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.menu-item:hover{
+    --clip: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.menu-dropdown{
+    clip-path: var(--clip);
+    list-style: none;
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    transition: clip-path .2s ease-in-out;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: max-content;
+    transform: translateY(100%);
+}
+
+.menu-link{
+    color: var(--text-white-color);
+    text-decoration: none;
+    padding: 0 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .2s ease-in-out;
+}
+
+.menu-link:hover{
+    background-color: var(--principal-color);
+}
+
+.menu-link-dropdown{
+    padding: 1rem;
+}
+
+h2{
+    width: 100%;
+    text-align: center;
+}
+
+.cultivos{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.form{
+    width: 65%;
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    grid-gap: 15px;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+
+.form input,
+.form select,
+.form textarea{
+    width: 100%;
+    height: 2rem;
+    outline: none;
+    border: 1px solid var(--border-light-color);
+    border-radius: .2rem;
+    padding-left: 1rem;
+}
+
+.form select{
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.form textarea{
+    padding-top: .5rem;
+    height: 10rem;
+    resize: none;
+}
+
+.multiple{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn{
+    width: 40%;
+    height: 2.5rem;
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid var(--border-light-color);
+    outline: none;
+    border-radius: .3rem;
+    margin-top: .5rem;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+}
+
+.btn:hover{
+    background-color: #000;
+    color: white;
+}
+
+.all-columns{
+    grid-column: 1 / -1;
+}
+
+.msg{
+    width: 100%;
+    min-height: 3rem;
+    border-radius: .3rem;
+    padding: 1rem 0;
+    text-align: center;
+    color: white;
+}
+
+.error{
+    background-color: var(--error-color);
+    border: 1px solid var(--border-error);
+}
+
+.success{
+    background-color: var(--succes-color);
+    border: 1px solid var(--border-succes);
+}
+
+.spin{
+    text-align: center;
+}
+
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: #5c6bc0;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+    0% {
+        top: 8px;
+        height: 64px;
+    }
+    50%, 100% {
+        top: 24px;
+        height: 32px;
+    }
+}
+
+.list{
+    width: 100%;
+    list-style: none;
+    font-size: 1.1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list li{
+    width: max-content;
+    padding: 0 1.5rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: background-color .2s ease-in-out;
+}
+
+.list li:hover{
+    background-color: var(--principal-color);
+}
+
+.categorias{
+    width: 90%;
+    margin: 0 auto;
+}

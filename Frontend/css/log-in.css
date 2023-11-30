@@ -1,0 +1,64 @@
+html{
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.iniciar-sesion{
+    width: 700px;
+    height: 500px;
+    border-radius: 1rem;
+    background-color: #3e5586;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.5);
+}
+
+.iniciar-sesion h1{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.iniciar-sesion input[type="text"],
+.iniciar-sesion input[type="password"]{
+    margin-bottom: 2rem;
+    width: 300px;
+    height: 30px;
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+    padding-left: 1.5rem;
+}
+
+.iniciar-sesion button{
+    width: 15rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    outline: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.iniciar-sesion button:hover{
+    transform: scale(1.1);
+}

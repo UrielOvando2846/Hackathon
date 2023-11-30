@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="main">
+        <h1>Panel Administrador</h1>
+        <nav class="menu">
+            <ul class="menu-options">
+                <li class="menu-item">
+                    <a href="#cultivos" class="menu-link">Cultivos</a>
+                    <ul class="menu-dropdown">
+                        <li class="menu-dropdown-item">
+                            <a href="#crear-cultivo" class="menu-link menu-link-dropdown">Crear Cultivo</a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a href="#actualizar-cultivo" class="menu-link menu-link-dropdown">Actualizar Cultivo</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#categorias" class="menu-link">Categorías</a>
+                    <ul class="menu-dropdown">
+                        <li class="menu-dropdown-item">
+                            <a href="#crear-categoria" class="menu-link menu-link-dropdown">Crear Categoría</a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a href="#actualizar-categoria" class="menu-link menu-link-dropdown">Actualizar Categoría</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    
+        <div id="cultivos" class="cultivos">
+            <h2>Cultivos</h2>
+
+            <h3 id="crear-cultivo">Crear Cultivo</h3>
+            <hr>
+            <form class="form" id="form-crear-cultivo">
+                <label for="nombre-cultivo">Nombre:</label>
+                <input type="text" id="nombre-cultivo" placeholder="Nombre">
+                
+                <label for="descripcion">Descripcion:</label>
+                <textarea id="descripcion" cols="30" rows="10" placeholder="Descripción"></textarea>
+        
+                <label>Condiciones que necesita el cultivo:</label>
+                <div class="multiple" id="condiciones-contenedor">
+                    <input class="condition-option" type="text" placeholder="Condición para el cultivo">
+
+                    <button class="btn add-condition">Añadir Condición</button>
+                    <button class="btn error delete-condition">Eliminar Condición</button>
+                </div>
+                
+                <label>Cuidados y Mantenimientos:</label>
+                <div class="multiple" id="cuidados-mantenimiento">
+                    <input class="cuidado-option" type="text" placeholder="Cuidado / Mantenimiento">
+
+                    <button class="btn add-cuidado">Añadir Cuidado</button>
+                    <button class="btn error delete-cuidado">Eliminar Cuidado</button>
+                </div>
+        
+                <label>Fechas de Siembra:</label>
+                <div id="fecha-siembra">
+                    <label for="fecha-siembra-inicio">Fecha de inicio para sembrar:</label>
+                    <input id="fecha-siembra-inicio" type="date"><br><br>
+                    <label for="fecha-siembra-fin">Fecha final para sembrar:</label>
+                    <input id="fecha-siembra-fin" type="date">
+                </div>
+        
+                <label>Fechas de Cosecha:</label>
+                <div id="fecha-cosecha">
+                    <label for="fecha-cosecha-inicio">Fecha de inicio para cosechar:</label>
+                    <input id="fecha-cosecha-inicio" type="date"><br><br>
+                    <label for="fecha-cosecha-fin">Fecha final para cosechar</label>
+                    <input id="fecha-cosecha-fin" type="date">
+                </div>
+        
+                <label for="categoria">Categoría:</label>
+                <select name="categorias" class="categoria-cultivo" id="categoria-nuevo-cultivo">
+                    <option value="empty">-- Seleccionar --</option>
+                </select>
+                <div class="spin spin-cultivos all-columns"></div>
+                <button id="crear-cultivo-btn" class="btn all-columns">Crear Cultivo</button>
+            </form>
+
+            <h3 id="actualizar-cultivo">Actualizar Cultivo</h3>
+            <hr>
+            <div id="obtener-cultivos">
+                <h3 id="seleccionar-cultivo-actualizar">Selecciona un cultivo</h3>
+                <ul class="list-cultivos list"></ul>
+                <hr>
+                <form class="form" id="form-actualizar-cultivo">
+                    <h3 id="title-actualizar-cultivo" class="all-columns"></h3>
+                    <label for="nombre-cultivo-actualizado">Nombre:</label>
+                    <input type="text" id="nombre-cultivo-actualizado" placeholder="Nombre">
+                    
+                    <label for="descripcion-actualizado">Descripcion:</label>
+                    <textarea id="descripcion-actualizado" cols="30" rows="10" placeholder="Descripción"></textarea>
+            
+                    <label>Condiciones que necesita el cultivo:</label>
+                    <div class="multiple" id="condiciones-contenedor-actualizado">
+                        <input class="condition-option" type="text" placeholder="Condición para el cultivo">
+    
+                        <button class="btn add-condition">Añadir Condición</button>
+                        <button class="btn error delete-condition">Eliminar Condición</button>
+                    </div>
+                    
+                    <label>Cuidados y Mantenimientos:</label>
+                    <div class="multiple" id="cuidados-mantenimiento-actualizado">
+                        <input class="cuidado-option" type="text" placeholder="Cuidado / Mantenimiento">
+    
+                        <button class="btn add-cuidado">Añadir Cuidado</button>
+                        <button class="btn error delete-cuidado">Eliminar Cuidado</button>
+                    </div>
+            
+                    <label>Fechas de Siembra:</label>
+                    <div id="fecha-siembra-actualizado">
+                        <label for="fecha-siembra-inicio-actualizado">Fecha de inicio para sembrar:</label>
+                        <input id="fecha-siembra-inicio-actualizado" type="date"><br><br>
+                        <label for="fecha-siembra-fin-actualizado">Fecha final para sembrar:</label>
+                        <input id="fecha-siembra-fin-actualizado" type="date">
+                    </div>
+            
+                    <label>Fechas de Cosecha:</label>
+                    <div id="fecha-cosecha-actualizado">
+                        <label for="fecha-cosecha-inicio-actualizado">Fecha de inicio para cosechar:</label>
+                        <input id="fecha-cosecha-inicio-actualizado" type="date"><br><br>
+                        <label for="fecha-cosecha-fin-actualizado">Fecha final para cosechar</label>
+                        <input id="fecha-cosecha-fin-actualizado" type="date">
+                    </div>
+            
+                    <label for="categoria">Categoría:</label>
+                    <select name="categorias" class="categoria-cultivo">
+                        <option value="empty">-- Seleccionar --</option>
+                    </select>
+                    <div class="spin spin-cultivos all-columns"></div>
+                    <button id="actualizar-cultivo-btn" class="btn">Actualizar Cultivo</button>
+                    <button id="eliminar-cultivo-btn" class="btn error">Eliminar Cultivo</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="categorias" class="categorias">
+            <h2>Categorías</h2>
+
+            <h3 id="crear-categoria">Crear Categoría</h3>
+            <hr>
+            <form class="form" id="form-crear-categoria">
+                <label for="nombre-categoria">Nombre:</label>
+                <input id="nombre-categoria" type="text" placeholder="Nombre">
+
+                <div class="spin spin-cultivos all-columns"></div>
+                <div class="spin-categoria all-columns" style="text-align: center;"></div>
+                <button id="crear-categoria-btn" class="btn all-columns">Crear Categoría</button>
+            </form>
+
+            <h3 id="actualizar-categoria">Actualizar Categoría</h3>
+            <hr>
+
+            <div id="obtener-categorias">
+                <h3 id="seleccionar-categoria-actualizar">Selecciona un categoria</h3>
+                <ul class="list list-categoria"></ul>
+                <hr>
+            </div>
+
+            <form class="form" id="form-actualizar-categoria">
+                <h3 id="title-actualizar-categoria" class="all-columns"></h3>
+                <label for="">Nombre:</label>
+                <input id="nombre-categoria-actualizado" type="text" placeholder="Nombre">
+
+                <div class="spin spin-categoria-actualizada all-columns"></div>
+                <button id="actualizar-categoria-btn" class="btn">Actualizar Categoría</button>
+                <button id="eliminar-categoria-btn" class="btn error">Eliminar Categoria</button>
+            </form>
+        </div>
+    </div>
+    <br><br><br><br><br>
+    <script type="module" src="../js/admin.js"></script>
+</body>
+</html>
