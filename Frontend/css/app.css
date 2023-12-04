@@ -209,7 +209,7 @@ aside{
     height: 97vh;
     color: var(--text-white-color);
     border-radius: 1rem;
-    background-color: var(--blue-color);
+    background-color: var(--principal-color);
     overflow-y: auto;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.3);
 }

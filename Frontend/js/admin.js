@@ -1,5 +1,6 @@
 import { actualizarCategoria, crearCategoria, eliminarCategoria, loadCategorias } from './modules/categoria.js';
 import { actualizarCultivo, crearCultivo, eliminarCultivo, loadFormCultivo, loadUpdateCultivo } from './modules/cultivo.js';
+import { actualizarPost, crearPost, eliminarPost, loadPosts } from './modules/post.js';
 import { validarToken } from './modules/verify-token.js';
 
 validarToken();
@@ -14,10 +15,16 @@ d.addEventListener('DOMContentLoaded', () => {
     const $btnActualizarCategoria = d.getElementById('actualizar-categoria-btn');
     const $btnEliminarCategoria = d.getElementById('eliminar-categoria-btn');
 
+    const $btnCrearPost = d.getElementById('crear-post-btn');
+    const $btnActualizarPost = d.getElementById('actualizar-post-btn');
+    const $btnEliminarPost = d.getElementById('eliminar-post-btn');
+
     loadFormCultivo('form-crear-cultivo');
     loadUpdateCultivo();
 
     loadCategorias();
+
+    loadPosts();
 
     d.addEventListener('click', e => {
 
@@ -45,6 +52,19 @@ d.addEventListener('DOMContentLoaded', () => {
         if(e.target === $btnEliminarCategoria){
             e.preventDefault();
             eliminarCategoria($btnActualizarCategoria);
+        }
+
+        if(e.target === $btnCrearPost){
+            e.preventDefault();
+            crearPost($btnCrearPost);
+        }
+        if(e.target === $btnActualizarPost){
+            e.preventDefault();
+            actualizarPost($btnActualizarPost);
+        }
+        if(e.target === $btnEliminarPost){
+            e.preventDefault();
+            eliminarPost($btnActualizarPost);
         }
     });
 });

@@ -1,43 +1,14 @@
-const d = document;
 import Cultivo from '../class/Cultivo.js';
+import Estado from '../class/Estado.js';
 import Spin from '../class/Spinner.js';
+import { createLi, createSelectOption, createInput, createDivMsg, createDivAndCheck } from '../helpers/create-elements.js';
+import { createMsg, messageNoSelected } from '../helpers/msg.js';
+import { removeMsgBox } from '../helpers/remove-elements.js';
+
+const d = document;
 
 const cultivo = new Cultivo();
-
-const createLiCultivo = (id, nombre) => {
-    const $li = d.createElement('li');
-    $li.textContent = nombre;
-    $li.setAttribute('data-idcultivo', id);
-
-    return $li;
-}
-
-const createSelectOption = nombre => {
-    const $option = d.createElement('option');
-    $option.textContent = nombre;
-    $option.value = nombre;
-
-    return $option;
-}
-
-const createInput = (placeholderName, classText) => {
-    const $input = d.createElement('input');
-    classText.forEach(nameClass => $input.classList.add(nameClass));
-    
-    $input.type = 'text';
-    $input.placeholder = placeholderName;
-    $input.style.marginTop = '7px';
-
-    return $input;
-}
-
-const createDivMsg = (className, msg) => {
-    const $div = d.createElement('div');
-    $div.classList.add(className, 'all-columns', 'msg');
-    $div.innerHTML = msg;
-    
-    return $div;
-}
+const estado = new Estado();
 
 const loadFormCultivo = async (id) => {
     const $addCondition = d.querySelector(`#${id} .add-condition`);
@@ -48,6 +19,22 @@ const loadFormCultivo = async (id) => {
 
     const $select = d.querySelector(`#${id} .categoria-cultivo`);
     $select.innerHTML = '';
+
+    const $checksBox = d.querySelector(`#${id} .checks-cultivo`);
+    $checksBox.innerHTML = '';
+
+    d.querySelectorAll(`.new-option`).forEach(el => el.remove());
+    d.querySelectorAll(`.new-option-cuidado`).forEach(el => el.remove());
+    
+    const $fragmentCheck = d.createDocumentFragment();
+    const { estados } = await estado.obtenerEstados();
+
+    estados.forEach(el => {
+        const { code, nombre } = el;
+        $fragmentCheck.appendChild(createDivAndCheck(nombre, code));
+    });
+
+    $checksBox.appendChild($fragmentCheck);
     
     const { categorias } = await cultivo.obtenerCategorias();
     
@@ -109,7 +96,7 @@ const loadUpdateCultivo = async () => {
         const $fragment = d.createDocumentFragment();
 
         cultivos.forEach(el => {
-            $fragment.appendChild(createLiCultivo(el._id, el.nombre));
+            $fragment.appendChild(createLi(el._id, el.nombre, 'data-idcultivo'));
         });
 
         $cultivosBox.appendChild($fragment);
@@ -119,13 +106,15 @@ const loadUpdateCultivo = async () => {
         $cultivos.forEach(el => {
             el.addEventListener('click', async e => {
                 const id = e.target.dataset.idcultivo;
+                const $checksEstado = d.querySelectorAll('#check-estado-actualizado input');
+                $checksEstado.forEach(el => el.checked = false);
                 
-                const cultivoId = await cultivo.obtenerCultivoId(id);
+                const { cultivo: cultivoId } = await cultivo.obtenerCultivoId(id);
                 const $form = d.getElementById('form-actualizar-cultivo');
-                $form.setAttribute('data-id', cultivoId.cultivo._id);
+                $form.setAttribute('data-id', cultivoId._id);
                 
                 const $h3Title = d.getElementById('title-actualizar-cultivo');
-                $h3Title.textContent = cultivoId.cultivo.nombre;
+                $h3Title.textContent = cultivoId.nombre;
                 $h3Title.style.width = '100%';
                 $h3Title.style.textAlign = 'center';
                 $h3Title.style.textTransform = 'Capitalize';
@@ -141,17 +130,18 @@ const loadUpdateCultivo = async () => {
 
                 const $categoria = d.querySelector('#form-actualizar-cultivo .categoria-cultivo');
 
-                $nombre.value = cultivoId.cultivo.nombre;
-                $descripcion.value = cultivoId.cultivo.descripcion;
+
+                $nombre.value = cultivoId.nombre;
+                $descripcion.value = cultivoId.descripcion;
 
                 const extraerInfo = () => {
                     let parserCondiciones = new DOMParser();
-                    let docCondiciones = parserCondiciones.parseFromString(cultivoId.cultivo.condiciones_cultivo, 'text/html');
+                    let docCondiciones = parserCondiciones.parseFromString(cultivoId.condiciones_cultivo, 'text/html');
                     let liElementsCondiciones = docCondiciones.querySelectorAll('li');
                     let textArrayCondiciones = Array.from(liElementsCondiciones).map(el => el.textContent);
 
                     let parserCuidados = new DOMParser();
-                    let docCuidados = parserCuidados.parseFromString(cultivoId.cultivo.cuidados_mantenimiento, 'text/html');
+                    let docCuidados = parserCuidados.parseFromString(cultivoId.cuidados_mantenimiento, 'text/html');
                     let liElementsCuidados = docCuidados.querySelectorAll('li');
                     let textArrayCuidados = Array.from(liElementsCuidados).map(el => el.textContent);
 
@@ -197,23 +187,33 @@ const loadUpdateCultivo = async () => {
                     const dayArr = fechaAsign.getDate();
 
                     const month = monthArr + 1;
-                    const day = ((dayArr + 1) > 31) ? '01' : dayArr+1;
+                    const day = ((dayArr + 1) > 31 || (dayArr + 1) > 30) ? '01' : dayArr+1;
 
                     contenedor.value = `${year}-${ (month < 10) ? '0' + month : month }-${ ((day < 10) && (day !== '01') ) ? '0'+day : day }`;
                 }
 
-                asignarFecha($fechaSiembraInicio, cultivoId.cultivo.fecha_siembra.inicio);
-                asignarFecha($fechaSiembraFin, cultivoId.cultivo.fecha_siembra.fin);
+                asignarFecha($fechaSiembraInicio, cultivoId.fecha_siembra.inicio);
+                asignarFecha($fechaSiembraFin, cultivoId.fecha_siembra.fin);
 
-                asignarFecha($fechaCosechaInicio, cultivoId.cultivo.fecha_cosecha.inicio);
-                asignarFecha($fechaCosechaFin, cultivoId.cultivo.fecha_cosecha.fin);
+                asignarFecha($fechaCosechaInicio, cultivoId.fecha_cosecha.inicio);
+                asignarFecha($fechaCosechaFin, cultivoId.fecha_cosecha.fin);
 
                 for (let i = 0; i < $categoria.options.length; i++) {
-                    if ($categoria.options[i].value === cultivoId.cultivo.categoria.toLowerCase()) {
+                    if ($categoria.options[i].value === cultivoId.categoria.toLowerCase()) {
                         $categoria.selectedIndex = i;
                         break; 
                     }
                 }
+
+                const { estados } = cultivoId;
+
+                $checksEstado.forEach(el => {
+                    estados.forEach(estado => {
+                        if(el.value === estado){
+                            el.checked = true;
+                        }
+                    });
+                });
             });
         });
     }else{
@@ -222,8 +222,7 @@ const loadUpdateCultivo = async () => {
 }
 
 const crearCultivo = async ($btnCrearCultivo) => {
-    const $msgBox = d.querySelector('.cultivos .msg');
-    if($msgBox) $msgBox.remove();
+    removeMsgBox('.cultivos');
 
     const nombre = d.getElementById('nombre-cultivo').value;
     const descripcion = d.getElementById('descripcion').value;
@@ -266,45 +265,27 @@ const crearCultivo = async ($btnCrearCultivo) => {
         }
     });
 
+    const estados = [];
+    const $estados = d.querySelectorAll('#check-estado input');
+    $estados.forEach(estado => {
+        if(estado.checked) estados.push(estado.value);
+    });
+
     Spin.newSpin('.spin-cultivos');
-    const res = await cultivo.crearCultivo(nombre.toLowerCase(), descripcion, condiciones, cuidados, fechaSiembra, fechaCosecha, categoria.toLowerCase());
+    const res = await cultivo.crearCultivo(nombre.toLowerCase(), descripcion, condiciones, cuidados, fechaSiembra, fechaCosecha, categoria.toLowerCase(), estados);
     Spin.destroySpin();
 
-    let $msg;
-    if(res.errors){
-        let errores = '';
-        res.errors.forEach(err => {
-            errores += `- ${err.msg} <br>`;
-        });
-
-        $msg = createDivMsg('error', errores);
-    }else{
-        $msg = createDivMsg('success', res.msg);
+    createMsg($btnCrearCultivo, res, '.cultivos', () => {
         d.getElementById('form-crear-cultivo').reset();
         loadUpdateCultivo();
-    }
-    
-    $btnCrearCultivo.insertAdjacentElement('beforebegin', $msg);
-
-    setTimeout(() => {
-        d.querySelector('.cultivos .msg').remove();
-    }, 3000);
+    });
 }
 
 const actualizarCultivo = async ($btnActualizarCultivo) => {
-    const $msgBox = d.querySelector('.cultivos .msg');
-    if($msgBox) $msgBox.remove();
+    removeMsgBox('.cultivos');
 
     const id = d.getElementById('form-actualizar-cultivo').dataset.id;
-    if(!id) {
-        $btnActualizarCultivo.insertAdjacentElement('beforebegin', createDivMsg('error', 'Aún no has seleccionado un cultivo para actualizar'));
-
-        setTimeout(() => {
-            d.querySelector('div .msg').remove();
-        }, 3000);
-
-        return false;
-    }
+    if(!messageNoSelected(id, $btnActualizarCultivo, 'Aún no has seleccionado un cultivo para actualizar')) return;
 
     const nombre = d.getElementById('nombre-cultivo-actualizado').value;
     const descripcion = d.getElementById('descripcion-actualizado').value;
@@ -349,68 +330,36 @@ const actualizarCultivo = async ($btnActualizarCultivo) => {
         }
     });
 
+    const estados = [];
+    const $estados = d.querySelectorAll('#check-estado-actualizado input');
+    $estados.forEach(estado => {
+        if(estado.checked) estados.push(estado.value);
+    });
+
     Spin.newSpin('#form-actualizar-cultivo .spin-cultivos');
-    const res = await cultivo.actualizarCultivo(id, nombre.toLowerCase(), descripcion, condiciones, cuidados, fechaSiembra, fechaCosecha, categoria.toLowerCase());
+    const res = await cultivo.actualizarCultivo(id, nombre.toLowerCase(), descripcion, condiciones, cuidados, fechaSiembra, fechaCosecha, categoria.toLowerCase(), estados);
     Spin.destroySpin();
 
-    let $msg;
-    if(res.errors){
-        let errores = '';
-        res.errors.forEach(err => {
-            errores += `- ${err.msg} <br>`;
-        });
-
-        $msg = createDivMsg('error', errores);
-    }else{
-        $msg = createDivMsg('success', res.msg);
+    createMsg($btnActualizarCultivo, res, '.cultivos', () => {
         d.getElementById('form-actualizar-cultivo').reset();
         d.getElementById('form-actualizar-cultivo').removeAttribute('data-id');
         loadUpdateCultivo();
-    }
-    
-    $btnActualizarCultivo.insertAdjacentElement('beforebegin', $msg);
-
-    setTimeout(() => {
-        d.querySelector('.cultivos .msg').remove();
-    }, 3000);
+    });
 }
 
 const eliminarCultivo = async ($btnActualizarCultivo) => {
     const id = d.getElementById('form-actualizar-cultivo').dataset.id;
-    if(!id) {
-        $btnActualizarCultivo.insertAdjacentElement('beforebegin', createDivMsg('error', 'Aún no has seleccionado un cultivo para actualizar'));
-
-        setTimeout(() => {
-            d.querySelector('div .msg').remove();
-        }, 3000);
-
-        return false;
-    }
+    if(!messageNoSelected(id, $btnActualizarCultivo, 'Aún no has seleccionado un cultivo para eliminar')) return;
 
     Spin.newSpin('#form-actualizar-cultivo .spin-cultivos');
     const res = await cultivo.eliminarCultivo(id);
     Spin.destroySpin();
 
-    let $msg;
-    if(res.errors){
-        let errores = '';
-        res.errors.forEach(err => {
-            errores += `- ${err.msg} <br>`;
-        });
-
-        $msg = createDivMsg('error', errores);
-    }else{
-        $msg = createDivMsg('success', res.msg);
+    createMsg($btnActualizarCultivo, res, '.cultivos', () => {
         d.getElementById('form-actualizar-cultivo').reset();
         d.getElementById('form-actualizar-cultivo').removeAttribute('data-id');
         loadUpdateCultivo();
-    }
-    
-    $btnActualizarCultivo.insertAdjacentElement('beforebegin', $msg);
-
-    setTimeout(() => {
-        d.querySelector('.cultivos .msg').remove();
-    }, 3000);
+    });
 }
 
 export {

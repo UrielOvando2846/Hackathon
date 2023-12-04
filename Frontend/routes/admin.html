@@ -33,6 +33,17 @@
                         </li>
                     </ul>
                 </li>
+                <li class="menu-item">
+                    <a href="#posts" class="menu-link">Post</a>
+                    <ul class="menu-dropdown">
+                        <li class="menu-dropdown-item">
+                            <a href="#crear-post" class="menu-link menu-link-dropdown">Crear Post</a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a href="#actualizar-post" class="menu-link menu-link-dropdown">Actualizar Post</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     
@@ -84,6 +95,8 @@
                 <select name="categorias" class="categoria-cultivo" id="categoria-nuevo-cultivo">
                     <option value="empty">-- Seleccionar --</option>
                 </select>
+                <label for="">Selecciona mínimo un estado en el que<br>pueda cultivarse:</label>
+                <div class="checks-cultivo" id="check-estado"></div>
                 <div class="spin spin-cultivos all-columns"></div>
                 <button id="crear-cultivo-btn" class="btn all-columns">Crear Cultivo</button>
             </form>
@@ -138,6 +151,8 @@
                     <select name="categorias" class="categoria-cultivo">
                         <option value="empty">-- Seleccionar --</option>
                     </select>
+                    <label for="">Selecciona mínimo un estado en el que<br>pueda cultivarse:</label>
+                    <div class="checks-cultivo" id="check-estado-actualizado"></div>
                     <div class="spin spin-cultivos all-columns"></div>
                     <button id="actualizar-cultivo-btn" class="btn">Actualizar Cultivo</button>
                     <button id="eliminar-cultivo-btn" class="btn error">Eliminar Cultivo</button>
@@ -170,7 +185,7 @@
 
             <form class="form" id="form-actualizar-categoria">
                 <h3 id="title-actualizar-categoria" class="all-columns"></h3>
-                <label for="">Nombre:</label>
+                <label for="nombre-categoria-actualizado">Nombre:</label>
                 <input id="nombre-categoria-actualizado" type="text" placeholder="Nombre">
 
                 <div class="spin spin-categoria-actualizada all-columns"></div>
@@ -178,7 +193,48 @@
                 <button id="eliminar-categoria-btn" class="btn error">Eliminar Categoria</button>
             </form>
         </div>
-    </div>
+
+        <div id="posts" class="posts">
+            <h2>Posts</h2>
+
+            <h3 id="crear-post">Crear Post</h3>
+            <hr>
+
+            <form class="form" id="form-crear-post">
+                <label for="titulo-post">Título:</label>
+                <input id="titulo-post" type="text" placeholder="Título">
+
+                <label for="info">Información:</label>
+                <textarea id="info" cols="30" rows="10" placeholder="Información"></textarea>
+
+                <div class="spin spin-post all-columns"></div>
+                <div class="spin-post all-columns" style="text-align: center;"></div>
+                <button id="crear-post-btn" class="btn all-columns">Crear Post</button>
+            </form>
+
+            <h3 id="actualizar-post">Actualizar Post</h3>
+            <hr>
+
+            <div id="obtener-posts">
+                <h3 id="seleccionar-post-actualizar">Selecciona un post</h3>
+                <ul class="list list-post"></ul>
+                <hr>
+            </div>
+
+            <form class="form" id="form-actualizar-post">
+                <h3 id="title-actualizar-post" class="all-columns"></h3>
+
+                <label for="titulo-post-actualizado">Título:</label>
+                <input id="titulo-post-actualizado" type="text" placeholder="Título">
+
+                <label for="info-actualizada">Información:</label>
+                <textarea id="info-actualizada" cols="30" rows="10" placeholder="Información"></textarea>
+
+                <div class="spin spin-post-actualizado all-columns"></div>
+                <button id="actualizar-post-btn" class="btn">Actualizar Post</button>
+                <button id="eliminar-post-btn" class="btn error">Eliminar Post</button>
+            </form>
+        </div>
     <br><br><br><br><br>
     <script type="module" src="../js/admin.js"></script>
 </body>

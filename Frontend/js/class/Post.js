@@ -1,8 +1,8 @@
-import { Router } from './Router.js';
+import { Router } from "./Router.js";
 
-export default class Categoria{
+export default class Post{
     constructor(){
-        this.token = localStorage.getItem('x-token');
+        this.token = localStorage.getItem('x-token')
     }
 
     setHeaders(){
@@ -13,20 +13,57 @@ export default class Categoria{
         return myHeaders;
     }
 
-    crearCategoria(nombre){
+    obtenerPosts(){
+        return new Promise(async(resolve, reject) => {
+            try {
+                const requestOptions = {
+                    method: 'GET'
+                };
+                  
+                const response = await fetch(Router.getRuteApi('/posts/'), requestOptions);
+                const res = response.json();
+
+                resolve(res);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    obtenerPostId(id){
+        return new Promise(async(resolve, reject) => {
+            try {
+                const requestOptions = {
+                    method: 'GET'
+                };
+                  
+                const response = await fetch(Router.getRuteApi(`/posts/${id}`), requestOptions);
+                const res = response.json();
+        
+                resolve(res);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    crearPost(titulo, info){
         return new Promise(async (resolve, reject) => {
             try {
                 const myHeaders = this.setHeaders();
 
-                const data = { nombre };
+                const raw = {
+                    titulo,
+                    info
+                }
 
                 const requestOptions = {
                     method: 'POST',
                     headers: myHeaders,
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(raw)
                 };
 
-                const response = await fetch(Router.getRuteApi('/categorias/'), requestOptions);
+                const response = await fetch(Router.getRuteApi('/posts/'), requestOptions);
                 const res = response.json();
 
                 resolve(res);
@@ -36,64 +73,33 @@ export default class Categoria{
         });
     }
 
-    obtenerCategorias(){
-        return new Promise(async (resolve, reject) => {
-            try {
-                const requestOptions = {
-                    method: 'GET'
-                };
-                  
-                const response = await fetch(Router.getRuteApi('/categorias/'), requestOptions);
-                const res = response.json();
-
-                resolve(res);
-            } catch (error) {
-                reject(error);
-            }
-        });
-    }
-
-    obtenerCategoriaId(id){
-        return new Promise(async (resolve, reject) => {
-            try {
-                const requestOptions = {
-                    method: 'GET'
-                };
-                  
-                const response = await fetch(Router.getRuteApi(`/categorias/${id}`), requestOptions);
-                const res = response.json();
-
-                resolve(res);
-            } catch (error) {
-                reject(error);
-            }
-        });
-    }
-
-    actualizarCategoria(id, nombre){
+    actualizarPost(id, titulo, info){
         return new Promise(async (resolve, reject) => {
             try {
                 const myHeaders = this.setHeaders();
 
-                const data = { nombre };
+                const raw = {
+                    titulo,
+                    info
+                }
 
                 const requestOptions = {
                     method: 'PUT',
                     headers: myHeaders,
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(raw)
                 };
 
-                const response = await fetch(Router.getRuteApi(`/categorias/update/${id}`), requestOptions);
+                const response = await fetch(Router.getRuteApi(`/posts/${id}`), requestOptions);
                 const res = response.json();
 
                 resolve(res);
             } catch (error) {
                 reject(error);
             }
-        });
+        })
     }
 
-    eliminarCategoria(id){
+    eliminarPost(id){
         return new Promise(async (resolve, reject) => {
             try {
                 const myHeaders = this.setHeaders();
@@ -103,7 +109,7 @@ export default class Categoria{
                     headers: myHeaders
                 };
 
-                const response = await fetch(Router.getRuteApi(`/categorias/delete/${id}`), requestOptions);
+                const response = await fetch(Router.getRuteApi(`/posts/${id}`), requestOptions);
                 const res = response.json();
 
                 resolve(res);

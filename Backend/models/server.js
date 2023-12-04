@@ -10,6 +10,8 @@ class Server{
         this.authPath = '/api/auth';
         this.cultivosPath = '/api/cultivos';
         this.categoriasPath = '/api/categorias';
+        this.estadosPath = '/api/estados';
+        this.postsPath = '/api/posts';
 
         // Conectar a base de datos
         this.conectarDB();
@@ -38,6 +40,8 @@ class Server{
         this.app.use(this.usuariosPath, require('../routes/usuario'));
         this.app.use(this.cultivosPath, require('../routes/cultivo'));
         this.app.use(this.categoriasPath, require('../routes/categoria'));
+        this.app.use(this.estadosPath, require('../routes/estado'));
+        this.app.use(this.postsPath, require('../routes/post'));
     }
 
     listen(){

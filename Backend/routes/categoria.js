@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { crearCategoria, obtenerCategorias, obtenerCategoriaId, actualizarCategoria, eliminarCategoria } = require('../controllers');
 const { validarJWT, esAdminRole, validarCampos } = require('../middlewares');
-const { categoriaNoExiste, existeCategoriaId } = require('../helpers');
+const { existeCategoriaId, existeCategoriaPorNombre } = require('../helpers');
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.post('/', [
     validarJWT,
     esAdminRole,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('nombre').custom( categoriaNoExiste ),
+    check('nombre').custom( existeCategoriaPorNombre ),
     validarCampos
 ], crearCategoria);
 
@@ -38,6 +38,6 @@ router.delete('/delete/:id', [
     check('id', 'Id inválido').isMongoId(),
     check('id').custom( existeCategoriaId ),
     validarCampos
-], eliminarCategoria)
+], eliminarCategoria);
 
 module.exports = router;

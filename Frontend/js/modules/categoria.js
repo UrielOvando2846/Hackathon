@@ -1,26 +1,13 @@
 import Categoria from '../class/Categoria.js';
 import Spin from '../class/Spinner.js';
-import { loadFormCultivo } from './cultivo.js';
+import { loadFormCultivo, loadUpdateCultivo } from './cultivo.js';
+import { createLi } from '../helpers/create-elements.js';
+import { createMsg, messageNoSelected } from '../helpers/msg.js';
+import { removeMsgBox } from '../helpers/remove-elements.js';
 
 const d = document;
 
 const categoria = new Categoria();
-
-const createDivMsg = (className, msg) => {
-    const $div = d.createElement('div');
-    $div.classList.add(className, 'all-columns', 'msg');
-    $div.innerHTML = msg;
-    
-    return $div;
-}
-
-const createLiCategoria = (id, nombre) => {
-    const $li = d.createElement('li');
-    $li.textContent = nombre;
-    $li.setAttribute('data-idcategoria', id);
-
-    return $li;
-}
 
 const loadCategorias = async () => {
     const { total, categorias } = await categoria.obtenerCategorias();
@@ -32,9 +19,10 @@ const loadCategorias = async () => {
     $categoriasBox.innerHTML = '';
     
     if(total > 0){
+        d.getElementById('seleccionar-categoria-actualizar').textContent = 'Selecciona una categoría';
         const $fragment = d.createDocumentFragment();
         categorias.forEach(cat => {
-            $fragment.appendChild(createLiCategoria(cat._id, cat.nombre));
+            $fragment.appendChild(createLi(cat._id, cat.nombre, 'data-idcategoria'));
         });
 
         $ul.appendChild($fragment);
@@ -59,12 +47,13 @@ const loadCategorias = async () => {
                 $nombre.value = categoriaId.nombre;
             });
         });
+    }else{
+        d.getElementById('seleccionar-categoria-actualizar').textContent = 'No existen categorías';
     }
 }
 
 const crearCategoria = async ($btnCrearCategoria) => {
-    const $msgBox = d.querySelector('.categorias .msg');
-    if($msgBox) $msgBox.remove();
+    removeMsgBox('.categoria');
 
     const nombre = d.getElementById('nombre-categoria').value.toLowerCase();
 
@@ -72,42 +61,19 @@ const crearCategoria = async ($btnCrearCategoria) => {
     const res = await categoria.crearCategoria(nombre);
     Spin.destroySpin();
 
-    let $msg;
-    if(res.errors){
-        let errores = '';
-        res.errors.forEach(err => {
-            errores += `- ${err.msg} <br>`;
-        });
-
-        $msg = createDivMsg('error', errores);
-    }else{
-        $msg = createDivMsg('success', res.msg);
+    createMsg($btnCrearCategoria, res, '.categorias', () => {
         d.getElementById('form-crear-categoria').reset();
+        loadCategorias();
         loadFormCultivo('form-actualizar-cultivo');
         loadFormCultivo('form-crear-cultivo');
-    }
-    
-    $btnCrearCategoria.insertAdjacentElement('beforebegin', $msg);
-
-    setTimeout(() => {
-        d.querySelector('.categorias .msg').remove();
-    }, 3000);
+    });
 }
 
 const actualizarCategoria = async ($btnActualizarCategoria) => {
-    const $msgBox = d.querySelector('.categorias .msg');
-    if($msgBox) $msgBox.remove();
+    removeMsgBox('.categorias');
 
     const id = d.getElementById('form-actualizar-categoria').dataset.id;
-    if(!id) {
-        $btnActualizarCategoria.insertAdjacentElement('beforebegin', createDivMsg('error', 'Aún no has seleccionado una categoría para actualizar'));
-
-        setTimeout(() => {
-            d.querySelector('div .msg').remove();
-        }, 3000);
-
-        return false;
-    }
+    if(!messageNoSelected(id, $btnActualizarCategoria, 'Aún no has seleccionado una categoría para actualizar')) return;
 
     const nombre = d.getElementById('nombre-categoria-actualizado').value;
 
@@ -115,71 +81,33 @@ const actualizarCategoria = async ($btnActualizarCategoria) => {
     const res = await categoria.actualizarCategoria(id, nombre);
     Spin.destroySpin();
 
-    let $msg;
-    if(res.errors){
-        let errores = '';
-        res.errors.forEach(err => {
-            errores += `- ${err.msg} <br>`;
-        });
-
-        $msg = createDivMsg('error', errores);
-    }else{
-        $msg = createDivMsg('success', res.msg);
+    createMsg($btnActualizarCategoria, res, '.categorias', () => {
         d.getElementById('form-actualizar-categoria').reset();
         d.getElementById('form-actualizar-categoria').removeAttribute('data-id');
         loadCategorias();
         loadFormCultivo('form-actualizar-cultivo');
         loadFormCultivo('form-crear-cultivo');
-    }
-    
-    $btnActualizarCategoria.insertAdjacentElement('beforebegin', $msg);
-
-    setTimeout(() => {
-        d.querySelector('.categorias .msg').remove();
-    }, 3000);
+    });
 }
 
 const eliminarCategoria = async ($btnActualizarCategoria) => {
-    const $msgBox = d.querySelector('.categorias .msg');
-    if($msgBox) $msgBox.remove();
+    removeMsgBox('.categorias')
 
     const id = d.getElementById('form-actualizar-categoria').dataset.id;
-    if(!id) {
-        $btnActualizarCategoria.insertAdjacentElement('beforebegin', createDivMsg('error', 'Aún no has seleccionado una categoría para eliminar'));
-
-        setTimeout(() => {
-            d.querySelector('div .msg').remove();
-        }, 3000);
-
-        return false;
-    }
+    if(!messageNoSelected(id, $btnActualizarCategoria, 'Aún no has seleccionado una categoría para eliminar')) return;
 
     Spin.newSpin('#form-actualizar-categoria .spin-categoria-actualizada');
     const res = await categoria.eliminarCategoria(id);
     Spin.destroySpin();
 
-    let $msg;
-    if(res.errors){
-        let errores = '';
-        res.errors.forEach(err => {
-            errores += `- ${err.msg} <br>`;
-        });
-
-        $msg = createDivMsg('error', errores);
-    }else{
-        $msg = createDivMsg('success', res.msg);
+    createMsg($btnActualizarCategoria, res, '.categorias', () => {
         d.getElementById('form-actualizar-categoria').reset();
         d.getElementById('form-actualizar-categoria').removeAttribute('data-id');
         loadCategorias();
         loadFormCultivo('form-actualizar-cultivo');
         loadFormCultivo('form-crear-cultivo');
-    }
-    
-    $btnActualizarCategoria.insertAdjacentElement('beforebegin', $msg);
-
-    setTimeout(() => {
-        d.querySelector('.categorias .msg').remove();
-    }, 3000);
+        loadUpdateCultivo();
+    });
 }
 
 export {

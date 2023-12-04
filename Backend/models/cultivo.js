@@ -43,6 +43,11 @@ const cultivoSchema = Schema({
         required: [true, 'La categoría es obligatoria'],
         ref: 'Categoria'
     },
+    estados: {
+        type: Array,
+        required: [true, "Es necesario al menos un estado"],
+        ref: 'Estado'
+    },
     estado: {type: Boolean, default: true}
 });
 

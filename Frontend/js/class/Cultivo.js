@@ -5,7 +5,7 @@ export default class Cultivo{
         
     }
 
-    crearCultivo(nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria){
+    crearCultivo(nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria, estados){
         return new Promise(async (resolve, reject) => {
             try {
                 const myHeaders = new Headers();
@@ -19,13 +19,14 @@ export default class Cultivo{
                     cuidados_mantenimiento,
                     fecha_siembra,
                     fecha_cosecha,
-                    categoria
+                    categoria,
+                    estados
                 }
 
                 const requestOptions = {
                     method: 'POST',
                     headers: myHeaders,
-                    body: JSON.stringify(data),
+                    body: JSON.stringify(data)
                   };
 
                 const response = await fetch(Router.getRuteApi('/cultivos/create'), requestOptions);
@@ -92,7 +93,7 @@ export default class Cultivo{
         });
     }
 
-    actualizarCultivo(id, nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria){
+    actualizarCultivo(id, nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria, estados){
         return new Promise(async (resolve, reject) => {
             try {
                 const myHeaders = new Headers();
@@ -106,7 +107,8 @@ export default class Cultivo{
                     cuidados_mantenimiento,
                     fecha_siembra,
                     fecha_cosecha,
-                    categoria
+                    categoria,
+                    estados
                 }
 
                 const requestOptions = {

@@ -30,9 +30,9 @@ const obtenerCultivoId = async (req, res = response) => {
 }
 
 const crearCultivo = async (req, res = response) => {
-    const { nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria } = req.body;
+    const { nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria, estados } = req.body;
 
-    const cultivo = new Cultivo({nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria});
+    const cultivo = new Cultivo({nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria, estados});
 
     await cultivo.save();
 
@@ -43,10 +43,10 @@ const crearCultivo = async (req, res = response) => {
 }
 
 const actualizarCultivo = async (req, res = response) => {
-    const { nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria } = req.body;
+    const { nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria, estados } = req.body;
     const { id } = req.params;
 
-    const cultivo = await Cultivo.findByIdAndUpdate(id, {nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria});
+    const cultivo = await Cultivo.findByIdAndUpdate(id, {nombre, descripcion, condiciones_cultivo, cuidados_mantenimiento, fecha_siembra, fecha_cosecha, categoria, estados});
 
     res.json({
         msg: 'Cultivo actualizaado correctamente',
