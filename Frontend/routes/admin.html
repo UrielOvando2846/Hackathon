@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin panel</title>
     <link rel="stylesheet" href="../css/admin.css">
+    <link href="../assets/fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
+    <link href="../assets/fontawesome-free-6.4.2-web/css/brands.css" rel="stylesheet">
+    <link href="../assets/fontawesome-free-6.4.2-web/css/solid.css" rel="stylesheet">
+    <link rel="icon" href="../assets/img/favicon.jpg">
 </head>
 <body>
+    <div class="loader" id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
     <div class="main">
         <h1>Panel Administrador</h1>
         <nav class="menu">
@@ -235,6 +242,10 @@
                 <button id="eliminar-post-btn" class="btn error">Eliminar Post</button>
             </form>
         </div>
+    </div>
+    <div class="logout" id="logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+    </div>
     <br><br><br><br><br>
     <script type="module" src="../js/admin.js"></script>
 </body>

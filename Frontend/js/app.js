@@ -1,32 +1,21 @@
-import { drawCalendar, coloringDates } from "./modules/calendar.js";
+import { itemMenuEvent, loadMenu } from "./modules/aside-menu.js";
+import { drawCalendar } from "./modules/calendar.js";
+import { addLoader } from "./modules/loader.js";
 import { drawMap } from "./modules/mapa.js";
 
-const d = document
+addLoader();
 
-d.addEventListener('DOMContentLoaded', () => {
+const d = document;
+
+d.addEventListener('DOMContentLoaded', async () => {
+    await loadMenu();
+
     const $btnCalendarioMenu = d.getElementById('calendario-menu');
     const $btnMapaMenu = d.getElementById('mapa-menu');
 
-    const $listContainer = d.querySelectorAll('.list-menu');
-
-    $listContainer.forEach(el => {
-        el.addEventListener('click', () => {
-            el.classList.toggle('arrow');
-
-            let height = 0;
-            let $menu = el.nextElementSibling;
-
-            if($menu.clientHeight === 0){
-                height = $menu.scrollHeight;
-            }
-
-            $menu.style.height = height+'px';
-        })
-    });
-
     if(!localStorage.getItem('menu')) localStorage.setItem('menu', 'calendar');
 
-    d.addEventListener('click', e => {
+    d.addEventListener('click', async e => {
         if(e.target === $btnCalendarioMenu) {
             localStorage.setItem('menu', 'calendar');
 
@@ -34,6 +23,7 @@ d.addEventListener('DOMContentLoaded', () => {
             $btnMapaMenu.classList.remove('selected');
 
             drawCalendar();
+            itemMenuEvent();
         }
         if(e.target === $btnMapaMenu) {
             localStorage.setItem('menu', 'mapa');
@@ -42,6 +32,7 @@ d.addEventListener('DOMContentLoaded', () => {
             $btnCalendarioMenu.classList.remove('selected');
 
             drawMap();
+            itemMenuEvent();
         }
     });
 
@@ -53,12 +44,5 @@ d.addEventListener('DOMContentLoaded', () => {
         drawMap();
     }
 
-    const $itemsMenu = d.querySelectorAll('.item');
-
-    $itemsMenu.forEach(el => {
-        el.addEventListener('click', e => {
-            coloringDates(new Date(2023, 3, 25), new Date(2023, 8, 15), 'siembra');
-            coloringDates(new Date(2023, 11, 25), new Date(2023, 11, 30), 'cosecha');
-        });
-    });
+    itemMenuEvent();
 });

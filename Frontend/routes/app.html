@@ -8,58 +8,16 @@
     <link href="../assets/fontawesome-free-6.4.2-web/css/fontawesome.css" rel="stylesheet">
     <link href="../assets/fontawesome-free-6.4.2-web/css/brands.css" rel="stylesheet">
     <link href="../assets/fontawesome-free-6.4.2-web/css/solid.css" rel="stylesheet">
+    <link rel="icon" href="../assets/img/favicon.jpg">
 </head>
 <body>
-
+    <div class="loader" id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
     <aside id="menu">
         <h3>Selecciona un Cultivo</h3>
-        <ul>
-            <li class="list-container">
-                <div class="align-li list-menu anim-bottom-menu to-center">
-                    <i class="fa-solid fa-plant-wilt"></i>
-                    <p class="name-group" id="cereales">Cereales</p>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-                <ul class="list-dinamic">
-                    <li class="align-li item-group">
-                        <i class="fa-solid fa-seedling"></i>
-                        <p class="item">Maíz</p>
-                    </li>
-                    <li class="align-li item-group">
-                        <i class="fa-solid fa-seedling"></i>
-                        <p class="item">Trigo</p>
-                    </li>
-                    <li class="align-li item-group">
-                        <i class="fa-solid fa-seedling"></i>
-                        <p class="item">Lenteja</p>
-                    </li>
-                </ul>
-            </li>
-
-
-            <li class="list-container">
-                <div class="align-li list-menu anim-bottom-menu to-center">
-                    <i class="fa-solid fa-plant-wilt"></i>
-                    <p class="name-group" id="cereales">Frutas</p>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-                <ul class="list-dinamic">
-                    <li class="align-li item-group">
-                        <i class="fa-solid fa-seedling"></i>
-                        <p class="item">Mango</p>
-                    </li>
-                    <li class="align-li item-group">
-                        <i class="fa-solid fa-seedling"></i>
-                        <p class="item">Fresa</p>
-                    </li>
-                    <li class="align-li item-group">
-                        <i class="fa-solid fa-seedling"></i>
-                        <p class="item">Plátano</p>
-                    </li>
-                </ul>
-            </li>
-            
-        </ul>
+        <div class="spin spin-aside"></div>
+        <ul></ul>
     </aside>
 
     
@@ -70,8 +28,15 @@
                 <li><p class="anim-bottom to-center" id="mapa-menu">Mapa</p></li>
             </ul>
         </nav>
+        
+        <div class="spin spin-app-content"></div>
         <div id="app"></div>
     </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
     <script type="module" src="../js/app.js"></script>
 </body>

@@ -1,9 +1,10 @@
 import { actualizarCategoria, crearCategoria, eliminarCategoria, loadCategorias } from './modules/categoria.js';
 import { actualizarCultivo, crearCultivo, eliminarCultivo, loadFormCultivo, loadUpdateCultivo } from './modules/cultivo.js';
+import { addLoader } from './modules/loader.js';
 import { actualizarPost, crearPost, eliminarPost, loadPosts } from './modules/post.js';
 import { validarToken } from './modules/verify-token.js';
 
-validarToken();
+addLoader();
 const d = document;
 
 d.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +19,9 @@ d.addEventListener('DOMContentLoaded', () => {
     const $btnCrearPost = d.getElementById('crear-post-btn');
     const $btnActualizarPost = d.getElementById('actualizar-post-btn');
     const $btnEliminarPost = d.getElementById('eliminar-post-btn');
+
+    const $btnLogOut = d.getElementById('logout');
+    const $btnLogOutIcon = d.querySelector('#logout i');
 
     loadFormCultivo('form-crear-cultivo');
     loadUpdateCultivo();
@@ -65,6 +69,11 @@ d.addEventListener('DOMContentLoaded', () => {
         if(e.target === $btnEliminarPost){
             e.preventDefault();
             eliminarPost($btnActualizarPost);
+        }
+
+        if(e.target === $btnLogOut || e.target === $btnLogOutIcon){
+            localStorage.clear();
+            location.reload();
         }
     });
 });

@@ -6,8 +6,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/index.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="./assets/img/favicon.jpg">
 </head>
 <body>
+    <div class="loader" id="loader">
+        <div class="lds-ripple"><div></div><div></div></div>
+    </div>
     <section class="home">
         <article class="hero-image">
             <aside class="hero-image-opacity">
@@ -23,40 +27,7 @@
     </section>
 
     <h2 class="h2-post" data-aos="fade-down">Tips y Consejos</h2>
-    <section class="posts">
-        <article data-aos="fade-up" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-down" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-up" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-down" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-up" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-down" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-up" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-        <article data-aos="fade-down" class="post">
-            <h4>Post</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel aspernatur maiores laborum, optio autem ex repellendus culpa iure magnam. Dolor iusto officia eaque suscipit? Quas fuga corporis nulla cupiditate totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ratione magni, assumenda voluptas natus dolorem adipisci molestias porro iure ab nostrum alias, praesentium cumque consequuntur odio nemo illum error temporibus.</p>
-        </article>
-    </section>
+    <section id="posts" class="posts"></section>
 
     <div id="progress-bar">
         <div id="progress-indicator"></div>
@@ -65,6 +36,6 @@
     <script>
         AOS.init();
     </script>
-    <script src="./js/index.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>

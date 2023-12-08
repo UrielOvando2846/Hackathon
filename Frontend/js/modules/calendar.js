@@ -1,4 +1,5 @@
 import Calendar from "../class/Calendar.js";
+import { drawCalendarColors } from "./aside-menu.js";
 
 const d = document;
 const calendar = new Calendar();
@@ -66,6 +67,9 @@ const drawStructure = () => {
     const $container = d.getElementById('app');
     $container.innerHTML = '';
 
+    const $divMainCalendar = d.createElement('div');
+    $divMainCalendar.id = 'app-calendar';
+
     // Crear elementos HTML
     const $titleCalendarDiv = d.createElement('div');
     $titleCalendarDiv.classList.add('title-calendar');
@@ -90,11 +94,61 @@ const drawStructure = () => {
     $div.classList.add('calendar-box');
     $div.id = 'calendar-box';
 
+    const $titleCultivo = d.createElement('h3');
+    $titleCultivo.classList.add('title-cultivo');
+    $titleCultivo.id = 'title-cultivo';
+
+    const $divOpt = d.createElement('div');
+    $divOpt.classList.add('options-simbology');
+    
+    const $optSiembra = d.createElement('div');
+    $optSiembra.classList.add('opt-simbology');
+
+    const $optSiembraSquare = d.createElement('div');
+    $optSiembraSquare.classList.add('opt-siembra');
+
+    const $infoSiembra = d.createElement('p');
+    $infoSiembra.textContent = 'Fechas de Siembra';
+    
+    const $optCosecha = d.createElement('div');
+    $optCosecha.classList.add('opt-simbology');
+    
+    const $optCosechaSquare = d.createElement('div');
+    $optCosechaSquare.classList.add('opt-cosecha');
+
+    const $infoCosecha = d.createElement('p');
+    $infoCosecha.textContent = 'Fechas de Cosecha';
+    
+    $optSiembra.appendChild($optSiembraSquare);
+    $optSiembra.appendChild($infoSiembra);
+    
+    $optCosecha.appendChild($optCosechaSquare);
+    $optCosecha.appendChild($infoCosecha);
+
+    $divOpt.appendChild($optSiembra);
+    $divOpt.appendChild($optCosecha);
+    
     // Agregar la estructura creada al contenedor en el DOM
-    $container.appendChild($titleCalendarDiv);
-    $container.appendChild($div);
+
+    $divMainCalendar.appendChild($titleCalendarDiv);
+    $divMainCalendar.appendChild($titleCultivo);
+    $divMainCalendar.appendChild($divOpt);
+    $divMainCalendar.appendChild($div);
+
+    $container.appendChild($divMainCalendar);
+
+    const $info = d.createElement('div');
+    $info.id = 'info';
+    const $app = d.getElementById('app');
+    $app.appendChild($info);
 }
 
+const stateDates = () => {
+    const $calendarBox = d.getElementById('calendar-box');
+    if($calendarBox.dataset.id){
+        drawCalendarColors(null, $calendarBox.dataset.id);
+    }
+}
 
 const drawCalendar = () => {
     const $menuMapa = d.getElementById('mapa-options');
@@ -132,9 +186,10 @@ const drawCalendar = () => {
                     $nextYearBtn.classList.add('disabled');
                     $lastYearBtn.classList.remove('disabled');
                 }
+                stateDates();
             }
         }
-    
+        
         if(e.target === $lastYearBtn){
             if(!(calendar.currentYear === year)){
                 const lastYear = calendar.lastYear();
@@ -145,12 +200,18 @@ const drawCalendar = () => {
                     $lastYearBtn.classList.add('disabled');
                     $nextYearBtn.classList.remove('disabled');
                 }
+                stateDates();
             }
         }
+
     });
 }
 
-const coloringDates = (startDate, endDate, className) => {
+const coloringDates = (startDate, endDate, className, nameCultivo, idCultivo) => {
+    d.querySelectorAll('.day').forEach(el => el.classList.remove(className));
+    const $calendarBox = d.getElementById('calendar-box');
+    if($calendarBox.dataset.id) $calendarBox.removeAttribute('data-id');
+    $calendarBox.setAttribute('data-id', idCultivo);
     const dayStart = startDate.getDate();
     const monthStart = startDate.getMonth();
     
@@ -158,12 +219,16 @@ const coloringDates = (startDate, endDate, className) => {
     const monthEnd = endDate.getMonth();
 
     const $calendar = d.querySelectorAll('.calendar');
+    const $title = d.getElementById('title-cultivo');
+
+    $title.textContent = '';
+    $title.textContent = nameCultivo;
 
     $calendar.forEach((el, i) => {
         if(i === monthStart){
             const $dayItem = el.querySelectorAll('.day');
             $dayItem.forEach((elDay, j) => {
-                if((j+2) > dayStart){
+                if((j+1) > dayStart){
                     elDay.classList.add(className);
                 }
             });
@@ -179,7 +244,7 @@ const coloringDates = (startDate, endDate, className) => {
         if(i === monthEnd){
             const $dayItem = el.querySelectorAll('.day');
             $dayItem.forEach((elDay, j) => {
-                if((j+1) <= dayEnd){
+                if((j) <= dayEnd){
                     elDay.classList.add(className);
                 }
             });

@@ -1,4 +1,7 @@
 import { Router } from './class/Router.js';
+import { addLoader } from './modules/loader.js';
+
+addLoader();
 
 const $btn = document.getElementById('log-in');
 

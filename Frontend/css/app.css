@@ -127,6 +127,44 @@ nav ul li p{
     transform: scale(1.3);
 }
 
+.title-cultivo{
+    position: relative;
+    margin: 0 auto;
+    width: 80%;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--border-light-color);
+    padding-bottom: 1rem;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.options-simbology{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opt-simbology{
+    margin: 0 35px;
+    display: flex;
+    align-items: center;
+}
+
+.opt-siembra{
+    width: 20px;
+    height: 20px;
+    background-color: var(--siembra-color);
+    margin-right: 20px;
+}
+
+.opt-cosecha{
+    width: 20px;
+    height: 20px;
+    background-color: var(--cosecha-color);
+    margin-right: 20px;
+}
+
 .disabled{
     color: rgba(0, 0, 0, .4);
 }
@@ -307,7 +345,7 @@ aside ul{
 
 .cosecha{
     background-color: var(--cosecha-color);
-    transition: background-color .2 ease-in-out;
+    transition: background-color .2s ease-in-out;
 }
 
 .mapa{
@@ -358,4 +396,166 @@ aside ul{
     .calendar-box{
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: circle(150% at 100% 0);
+    transition: clip-path 0.5s ease-in-out;
+}
+
+.to-loader{
+    clip-path: circle(0% at 100% 0);
+}
+
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ripple div {
+    position: absolute;
+    border: 4px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    4.9% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    5% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
+}
+
+.spin{
+    text-align: center;
+}
+
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: #5c6bc0;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+    0% {
+        top: 8px;
+        height: 64px;
+    }
+    50%, 100% {
+        top: 24px;
+        height: 32px;
+    }
+}
+
+#info{
+    width: 85%;
+    margin: 0 auto;
+    padding: 1rem;
+    font-size: 1.15rem;
+}
+
+.box-info-cultivo{
+    width: 100%;
+}
+
+.box-info-cultivo h2{
+    width: 100%;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light-color);
+}
+
+.spinner-map{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+.h2-mapa{
+    width: 100%;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.ul-estados{
+    width: 100%;
+    display: flex;
+}
+
+.ul-estados li {
+    margin-right: 45px;
 }
